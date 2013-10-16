@@ -1,0 +1,39 @@
+body {
+    padding-top: 70px;
+}
+
+.hidden {
+    display: none;
+}
+
+.col-md-12 {
+	padding-left:15%;
+	padding-right:15%;
+	margin: auto;
+}
+.col-lg-12{
+	width: 100%;
+	margin: auto;
+}
+h3{
+	text-align:center; 
+
+}
+h2{
+	text-align:center; 
+
+}
+#fb-box {
+width:100%;
+	padding-left:15%;
+	padding-right:15%;
+	margin: auto;
+text-align: center;
+}
+.fb-like {
+width:100%;
+	padding-left:15%;
+	padding-right:15%;
+	margin: auto;
+text-align: center;
+}
