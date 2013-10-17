@@ -1,1 +1,144 @@
-../../client/app/index.html
+<!doctype html>
+<html>
+    <head>
+        <title>Thesis Library</title>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+    </head>
+    <body>
+        <div id="fb-root"></div>
+            
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"><img src=""></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="javascript:void(0)">Thesis Manager</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav menu-crud">
+                        <li class='menu-create item'><a href="javascript:void(0)">Create New</a></li>
+                        <li class='menu-list item'><a href="javascript:void(0)">Show All</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class='menu-loading'><a href="#">Loading...</a></li>
+                        <li class="menu-user dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class='user-email'></span> <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" class='btn-logout'>Logout</a></li>
+                                <li ><a href="#">About</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <a href='#' class="btn btn-primary btn-login navbar-btn navbar-right">Log in</a>
+                    <form class='navbar-form navbar-right form-search' role='search' _lpcheck='1'>
+                        <div class='form-group'>
+                                <input type='text' class='form-control search-input' placeholder='Search'>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+            <div class='container'>
+                <div class='row app-content'>
+                </div>
+            </div>
+        </div>
+
+        <!-- scripts -->
+        <!-- =================== -->
+        <script src="js/jquery.js"></script>
+        <script src="js/underscore.js"></script>
+        <script src="js/backbone.js"></script>
+        <script src="js/handlebars.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/app.js"></script>
+
+
+        <!-- templates -->
+        <!-- =================== -->
+        <script id="tpl-thesis-list" type="text/x-handlebars-template">
+        <div class='col-md-12'>
+                <table class='table table-hover'>
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Title</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class='thesis-list'>
+                    </tbody>
+                </table>
+            </div>
+        </script>
+        <script id="tpl-view-comment" type="text/x-handlebars-template">
+            <div class='col-md-7'>
+                <div>
+                    <h4>{{Year}}</h4>
+                    <h4>{{Title}}</h4>
+                </div>
+            </div>
+        </script>
+        <script id="tpl-thesis-list-item" type="text/x-handlebars-template">
+            <tr data-id="{{Id}}">
+                <td>{{Year}}</td>
+                <td>{{Title}}</td>
+                <td><a href='javascript:void(0)' class=' btn btn-primary' id="edit-btn">Edit</a></td>
+                <td><a href='javascript:void(0)' class=' btn btn-primary' id="del-btn">Delete</a></td>
+            </tr>
+        </script>
+
+
+        <script id="tpl-thesis-form" type="text/x-handlebars-template">
+            <div class='col-md-12 thesis-form'>
+                <form role="form">
+                    <div class="form-group">
+                        <label for="year-input">Year</label>
+                        <select id='year-input' name='Year' class="form-control">
+                          <option value='2013' {{#compare Year '2013'}}selected{{/compare}}>2013</option>
+                          <option value='2012' {{#compare Year '2012'}}selected{{/compare}}>2012</option>
+                          <option value='2011' {{#compare Year '2011'}}selected{{/compare}}>2011</option>
+                          <option value='2010' {{#compare Year '2010'}}selected{{/compare}}>2010</option>
+                          <option value='2009' {{#compare Year '2009'}}selected{{/compare}}>2009</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tite-input">Title</label>
+                        <input id='title-input' type="text" class="form-control" name='Title' placeholder="Enter title.." value='{{Title}}'>
+                    </div>
+                    <div class="form-group">
+                        <label for="subtite-input">Subtitle</label>
+                        <input id='subtitle-input' type="text" class="form-control" name='Subtitle' placeholder="Enter subtitle.." value='{{Subtitle}}'>
+                    </div>
+                    <div class="form-group">
+                        <label for="description-input">Description</label>
+                        <textarea id='description-input' name='Description' class="form-control" rows="3">{{Description}}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id='save-btn'>Save</button>
+                    {{#if Id}}
+                    <button class="btn btn-default">Delete</button>
+                    {{/if}}
+                </form>
+            </div>
+        </script>
+         <script id="tpl-view" type="text/x-handlebars-template">
+               <div class='col-lg-12'>
+                    <h2>{{Title}}</h2>
+                    <h3>{{Year}}</h3>
+                    <h3>{{Subtitle}}</h3>
+                    <h3>{{Description}}</h3>
+                    <div class="fb-like" data-href="https://teamliquisthesismanager.appspot.com/thesis-{{Id}}" data-colorscheme="light" data-layout="standard" data-action="like" data-show-faces="true" data-send="false"></div>
+                <div id='fb-box'>
+                    <div class="fb-comments" data-href="http://teamliquisthesismanager.appspot.com/thesis-{{Id}}" data-colorscheme="dark" data-numposts="5" data-width="The pixel width of the plugin"></div>
+                </div>
+                </div>
+        </script>
+        <div class='nav-footer'></div>
+    </body>
+</html>
+

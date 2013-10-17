@@ -37,7 +37,7 @@ includes:
   - tailbone/restful
   ## Any path without a file extension not in /api gets the app/client/index.html text. Useful for
   ## html5 applications that use the history api to write their paths.
-  # - tailbone/pathrewrite
+  - tailbone/pathrewrite
   ## Serve the app folder. Static protected resource can change protection in appengine_config.py
   # - tailbone/static/protected
   ## Serve the app folder. Static public resource (can only have protected or public not both)

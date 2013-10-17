@@ -180,7 +180,6 @@ $(function() {
                 funcbtn=2;
             });
         $('.table tbody tr').click(function(event){
-            alert(funcbtn);
             if(funcbtn==1)
             {
                 app.router.navigate('edit-' + $(this).attr('data-id'), {trigger: true});
